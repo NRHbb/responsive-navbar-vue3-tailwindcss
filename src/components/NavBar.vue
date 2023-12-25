@@ -66,11 +66,15 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 
+//navbar responsive and transition
+
+  //responsive
 const showMenu = ref(false);
 const isScrolled = ref(false);
 
 const toggleNav = () => (showMenu.value = !showMenu.value);
 
+  //transition bg navbar
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 100;
 };
