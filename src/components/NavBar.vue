@@ -1,5 +1,8 @@
 <template>
-    <div class="bg-slate-600">
+    <div 
+    :class="{ 'bg-transparent': !isScrolled, 'bg-white': isScrolled, 'shadow-lg': isScrolled  }" 
+    class="fixed w-full top-0 z-10 transition-all ease-in duration-300">
+      <!-- Navbar -->
       <nav
         class="
           container
@@ -15,18 +18,18 @@
             class="
               text-xl
               font-bold
-              text-gray-100
+              text-black
               md:text-2xl
               hover:text-orange-400
             "
-            >Logo
+            > Logo
           </router-link>
           <!-- Mobile menu button -->
           <div @click="toggleNav" class="flex md:hidden">
             <button
               type="button"
               class="
-                text-gray-100
+                text-black
                 hover:text-gray-400
                 focus:outline-none focus:text-orange-400
               "
@@ -51,20 +54,34 @@
             md:flex md:space-y-0 md:flex-row md:items-center md:space-x-10 md:mt-0
           "
         >
-          <li class="text-gray-100 hover:text-orange-400 font-semibold">Home</li>
-          <li class="text-gray-100 hover:text-orange-400 font-semibold">About</li>
-          <li class="text-gray-100 hover:text-orange-400 font-semibold">Blogs</li>
-          <li class="text-gray-100 hover:text-orange-400 font-semibold">Contact Us</li>
+          <li class="text-black hover:text-orange-400 font-semibold">Home</li>
+          <li class="text-black hover:text-orange-400 font-semibold">About</li>
+          <li class="text-black hover:text-orange-400 font-semibold">Blogs</li>
+          <li class="text-black hover:text-orange-400 font-semibold">Contact Us</li>
         </ul>
       </nav>
     </div>
   </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 
 const showMenu = ref(false);
+const isScrolled = ref(false);
+
 const toggleNav = () => (showMenu.value = !showMenu.value);
+
+const handleScroll = () => {
+  isScrolled.value = window.scrollY > 100;
+};
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', handleScroll);
+});
 </script>
 
 
