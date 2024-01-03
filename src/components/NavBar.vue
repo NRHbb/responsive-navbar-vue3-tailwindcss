@@ -1,6 +1,9 @@
 <template>
     <div 
-    :class="{ 'bg-transparent': !isScrolled, 'bg-white': isScrolled, 'shadow-lg': isScrolled  }" 
+    :class="{
+            'bg-transparent': !isScrolled,
+            'bg-white': (isScrolled && !showMenu) || showMenu,
+            'shadow-lg': isScrolled}" 
     class="fixed w-full top-0 z-10 transition-all ease-in duration-300">
       <!-- Navbar -->
       <nav
